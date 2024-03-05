@@ -44,7 +44,6 @@ ax1.set_title('Tingkat Penggunaan Sepeda Sharing per Bulan')
 ax1.set_xlabel('Bulan')
 ax1.set_ylabel('Jumlah Peminjaman')
 ax1.set_xticks(month_usage.index)
-st.pyplot(fig1)
 
 fig2, ax2 = plt.subplots(figsize=(10, 6))
 holiday_usage = day_df.groupby('holiday')['cnt'].mean()
@@ -53,4 +52,7 @@ ax2.set_title('Perbandingan Pola Penggunaan Sepeda Sharing pada Hari Kerja dan H
 ax2.set_xlabel('Hari')
 ax2.set_ylabel('Jumlah Peminjaman')
 ax2.set_xticks(holiday_usage.index)
+
+# Tampilkan grafik-garik menggunakan st.pyplot()
+st.pyplot(fig1)
 st.pyplot(fig2)
