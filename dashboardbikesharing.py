@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt  # Import matplotlib
+import matplotlib.pyplot as plt
 
 # Load data
 hour_df = pd.read_csv("hour.csv")
@@ -37,23 +37,20 @@ else:
     st.line_chart(day_df['cnt'])
 
 # Tambahkan dua grafik tambahan
-plt.figure(figsize=(10, 6))
-
-# Grafik pertama: Tingkat Penggunaan Sepeda Sharing per Bulan
+fig1, ax1 = plt.subplots(figsize=(10, 6))
 month_usage = day_df.groupby('mnth')['cnt'].mean()
-plt.bar(month_usage.index, month_usage.values, color='skyblue')
-plt.title('Tingkat Penggunaan Sepeda Sharing per Bulan')
-plt.xlabel('Bulan')
-plt.ylabel('Jumlah Peminjaman')
-plt.xticks(rotation=0)
-st.pyplot()
+ax1.bar(month_usage.index, month_usage.values, color='skyblue')
+ax1.set_title('Tingkat Penggunaan Sepeda Sharing per Bulan')
+ax1.set_xlabel('Bulan')
+ax1.set_ylabel('Jumlah Peminjaman')
+ax1.set_xticks(month_usage.index)
+st.pyplot(fig1)
 
-# Grafik kedua: Perbandingan Pola Penggunaan Sepeda Sharing pada Hari Kerja dan Hari Libur
-plt.figure(figsize=(10, 6))
+fig2, ax2 = plt.subplots(figsize=(10, 6))
 holiday_usage = day_df.groupby('holiday')['cnt'].mean()
-plt.bar(holiday_usage.index, holiday_usage.values, color=['lightgreen', 'lightcoral'])
-plt.title('Perbandingan Pola Penggunaan Sepeda Sharing pada Hari Kerja dan Hari Libur')
-plt.xlabel('Hari')
-plt.ylabel('Jumlah Peminjaman')
-plt.xticks(rotation=0)
-st.pyplot()
+ax2.bar(holiday_usage.index, holiday_usage.values, color=['lightgreen', 'lightcoral'])
+ax2.set_title('Perbandingan Pola Penggunaan Sepeda Sharing pada Hari Kerja dan Hari Libur')
+ax2.set_xlabel('Hari')
+ax2.set_ylabel('Jumlah Peminjaman')
+ax2.set_xticks(holiday_usage.index)
+st.pyplot(fig2)
